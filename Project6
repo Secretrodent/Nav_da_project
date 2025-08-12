@@ -1,0 +1,24 @@
+# getting data from an API
+
+import requests
+import json
+
+base_url = 'https://pokeapi.co/api/v2/pokemon'
+
+choose_yo_poke = input( 'who do you want as your pokemon? \n')
+
+target_url = f'{base_url}/{choose_yo_poke}'
+
+#print(target_url)
+
+
+response = requests.get(target_url)
+
+result = response.json()
+
+#for key, value in result.items():
+print('The name is', result['name'])
+      
+print('The height is ' ,result['height'])
+
+print('The weight is ', result['weight'])
