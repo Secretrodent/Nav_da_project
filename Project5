@@ -2,4 +2,7 @@
 
 capitals = {'USA':'W DC', 'India':'ND', 'UK':'London'}
 
-print(capitals.get('USA'))
+capitals.update({'Germany':'Berlin'})
+
+for value in capitals.values():
+   print(capitals['USA'])
