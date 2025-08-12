@@ -1,0 +1,5 @@
+# Dictionaries
+
+capitals = {'USA':'W DC', 'India':'ND', 'UK':'London'}
+
+print(capitals.get('USA'))
