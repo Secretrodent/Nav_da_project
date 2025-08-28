@@ -1,0 +1,13 @@
+import requests
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+url = "https://vault-dev.setvice.ia.test.group:8200"
+
+response = requests.get(url, verify=False)
+
+data = response.json()
+
+print(data)
+

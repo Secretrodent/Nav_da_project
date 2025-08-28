@@ -1,0 +1,9 @@
+
+# I could not use the 'with open' way as this is a docx file so needed a different module as shown below.
+
+from docx import Document
+
+
+doc = Document('Cover Letter1.Docx')
+for par in doc.paragraphs:
+    print(par.text)

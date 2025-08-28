@@ -1,0 +1,20 @@
+# NASA pic of the day
+
+import requests
+import json
+import urllib3
+import webbrowser
+
+url = "https://api.nasa.gov/planetary/apod"
+api_key = "ld39xEmVKMDVqI7MVuR1iSpWCdeOVp3WrbqUNCmm"
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+response = requests.get(url, params={"api_key":api_key})
+data = response.json()
+
+print("Title:", data.get("title"))
+print("Explanation:", data.get("explnation"))
+print("Image URL:", data.get("url"))
+
+webbrowser.open(data.get("url"))

@@ -1,0 +1,96 @@
+#https://www.youtube.com/watch?v=ehD6tdxmjDU
+
+# at some point watch the video again
+
+import json
+
+file_name = "todo_list.json"
+
+def load_task():
+    try:
+      with open(file_name, "r") as file:
+         return json.load(file)
+      
+    except:
+        return{"tasks":[]}  
+
+
+def save_task(tasks):
+    try:
+      with open(file_name, "w") as file:
+         json.dump(tasks,file)
+      
+    except:
+        print("failed to save")
+
+
+def view_task(tasks):
+    print()
+    task_list = tasks["tasks"]
+    if len(task_list) == 0:
+        print("No tasks to display.")
+    else:
+        print("Your To-Do list:")    
+        for idx, task in enumerate(task_list):
+            status = "[Completed]" if task["complete"] else "[Pending]"
+            print(f"{idx + 1}.{task['description']} |{status}")
+
+
+def create_task(tasks):
+    description = input("enter the task desc: ").strip()
+    if description:
+        tasks["tasks"].append({"description": description, "complete": False})
+        save_task(tasks)
+        print("Task added.")
+        return load_task()  # Reload tasks from file
+    else:
+        print("Description can not be empty")
+        return tasks
+
+
+def mark_task_done(tasks):
+    view_task(tasks)
+    try:
+        task_number = int(input("Enter the task number to mark as complete: ").strip())
+        if 1 <= task_number <= len(tasks["tasks"]):
+            tasks["tasks"][task_number - 1]["complete"] = True
+            save_task(tasks)
+            print("Task is marked as complete.")
+            return load_task()  # Reload tasks from file
+        else:
+            print("Invalid task number.")
+            return tasks
+    except ValueError:
+        print("Please enter a valid number.")
+        return tasks
+
+def main():
+    # If you want to initialize with a default task, use the correct format:
+    # save_task({"tasks": [{"description": "saved task", "complete": False}]})
+    tasks = load_task()
+
+    while True:
+        print("\n To-Do list Manager")
+        print("1. View Tasks")
+        print("2. Add task")
+        print("3. Complete Task")
+        print("4. Exit")
+
+        Choice = input("Enter your choice: ").strip()
+
+        if Choice == "1":
+            view_task(tasks)
+        elif Choice == "2":
+            tasks = create_task(tasks)
+        elif Choice == "3":
+            tasks = mark_task_done(tasks)
+        elif Choice == "4":
+            print("Goodbye")
+            break
+        else:
+            print("Invalid Choice: Please enter a valid choice")  
+
+main()                  
+
+         
+

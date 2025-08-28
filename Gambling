@@ -1,4 +1,5 @@
-# follow along from youtube
+# follow along from youtube(Tech With Tim)
+# at some point watch the video again
 import random
 
 MAX_LINES = 3
